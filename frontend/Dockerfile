@@ -2,14 +2,18 @@ FROM node:22
 
 WORKDIR /app
 
+#Copiando apenas os arquivos necessários
 COPY package*.json ./
-RUN npm install
-RUN npm install -g serve
 
+#Instalando dependências os arquivos
+RUN npm install
+
+#Copia o restante do projeto
 COPY . .
 
+
+
 RUN npm run build
+CMD ["npm", "run", "dev"]
 
 EXPOSE 80
-
-CMD ["serve", "-s", "dist", "-l", "80"]
